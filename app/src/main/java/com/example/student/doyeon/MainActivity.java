@@ -1,23 +1,43 @@
 package com.example.student.doyeon;
-import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
+import java.util.Random;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.DragEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-public class MainActivity extends AppCompatActivity {
-    ImageView img;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        img=(ImageView)findViewById(R.id.img1);
+        RelativeLayout rl = new RelativeLayout(this);
+        final ImageView image;
+        // RelativeLayout width, height 설정
+        for (int i = 0; i <= 5; i++) {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
+                    (ViewGroup.LayoutParams.MATCH_PARENT,
+                     ViewGroup.LayoutParams.MATCH_PARENT);
 
-        img.setOnClickListener(new View.OnClickListener() {
+            // RelativeLayout에 width, height 설정 적용
+            rl.setLayoutParams(params);
+            image = new ImageView(this);
+            image.setId(i);
+            image.setImageResource(R.drawable.hi);
+        }
+        image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                img.setImageResource(0);
+                image.setImageResource(0);
             }
         });
+        // RelativeLayout에 차일드 View 추가
+        rl.addView(image);
+        // Acitivty화면에 보일 View를 연결해 준다.
+        setContentView(rl);
     }
 }
